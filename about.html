@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Lilith Haig</title>
+  <meta name="description" content="Motion designer and creative strategist with 5+ years bringing brands to life. Based in New York."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+  :root {
+    --parchment: #F7F3EC;
+    --linen:     #EDE7DC;
+    --clay:      #C8A882;
+    --clay-dark: #A8865C;
+    --soil:      #2C2419;
+    --soil-mid:  #6B5A47;
+    --soil-faint:#B8A898;
+    --rule:      #DDD5C8;
+    --moss:      #5C6E4A;
+    --terracotta:#C4624A;
+    --terracotta2:#D9856E;
+    --cream:     #FDFAF5;
+    --r: 16px;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  /* Grain */
+  body::before {
+    content:''; position:fixed; inset:0; z-index:1000; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity:.028; mix-blend-mode:multiply;
+  }
+
+  body {
+    background:var(--parchment);
+    color:var(--soil);
+    font-family:'Instrument Sans',-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    cursor:none;
+  }
+  a { text-decoration:none; color:inherit; }
+  img { display:block; max-width:100%; }
+
+  /* CURSOR */
+  #c-dot {
+    width:7px; height:7px; background:var(--terracotta);
+    border-radius:50%; position:fixed; top:0; left:0;
+    pointer-events:none; z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .2s,height .2s;
+  }
+  #c-ring {
+    width:26px; height:26px;
+    border:1px solid rgba(44,36,25,.2);
+    border-radius:50%; position:fixed; top:0; left:0;
+    pointer-events:none; z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:width .28s cubic-bezier(.16,1,.3,1),
+                height .28s cubic-bezier(.16,1,.3,1),
+                border-color .2s;
+  }
+  body.hov #c-ring { width:46px; height:46px; border-color:var(--terracotta); }
+  body.hov #c-dot  { width:5px; height:5px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    height:56px; display:flex; align-items:center; justify-content:center;
+    border-bottom:1px solid transparent;
+    transition:background .4s,border-color .4s;
+  }
+  nav.scrolled {
+    background:rgba(247,243,236,.9);
+    backdrop-filter:blur(16px) saturate(150%);
+    border-color:rgba(221,213,200,.7);
+  }
+  .nav-inner {
+    width:100%; max-width:1100px; padding:0 40px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-logo {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:18px; font-weight:400; letter-spacing:.02em; transition:color .2s;
+  }
+  .nav-logo:hover { color:var(--terracotta); }
+  .nav-links { display:flex; align-items:center; gap:36px; list-style:none; }
+  .nav-links a {
+    font-size:13px; color:var(--soil-mid); letter-spacing:.04em; transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--soil); }
+  .nav-links a.active { color:var(--soil); border-bottom:1px solid var(--clay); padding-bottom:1px; }
+  .nav-cta {
+    background:var(--soil) !important; color:var(--parchment) !important;
+    padding:8px 20px !important; border-radius:99px !important;
+    font-size:13px !important; transition:background .2s,transform .15s !important;
+  }
+  .nav-cta:hover { background:var(--terracotta) !important; transform:scale(1.02); }
+
+  /* ── PAGE HEADER ─────────────────────────────────────── */
+  .page-header {
+    padding:140px 40px 80px;
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:80px; align-items:end;
+  }
+  .page-header-left {}
+  .page-kicker {
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--clay-dark); margin-bottom:24px;
+    display:flex; align-items:center; gap:12px;
+    opacity:0; animation:fadeUp .6s .1s forwards;
+  }
+  .kicker-rule { display:inline-block; width:28px; height:1px; background:var(--clay); }
+  .page-title {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:clamp(64px,9vw,120px);
+    font-weight:300; line-height:.88;
+    letter-spacing:-.04em; color:var(--soil);
+    padding-bottom:.2em; overflow:visible;
+  }
+  .page-title .line { display:block; overflow:visible; padding-bottom:.04em; }
+  .page-title .word {
+    display:inline-block; opacity:0; transform:translateY(52px);
+    animation:wordRise .85s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  .page-title .line:nth-child(1) .word { animation-delay:.2s; }
+  .page-title .line:nth-child(2) .word { animation-delay:.34s; font-style:italic; color:var(--terracotta); }
+
+  .page-header-right {
+    padding-bottom:8px;
+    opacity:0; animation:fadeUp .7s .5s forwards;
+  }
+  .header-intro {
+    font-size:18px; font-weight:300; line-height:1.75;
+    color:var(--soil-mid); margin-bottom:32px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+  }
+  .header-intro strong { font-style:normal; color:var(--soil); font-weight:400; }
+  .header-tagline {
+    font-size:14px; line-height:1.7; color:var(--soil-mid);
+    padding-left:20px;
+    border-left:2px solid var(--clay);
+  }
+
+  /* ── PHOTO + INTRO ROW ───────────────────────────────── */
+  .intro-row {
+    max-width:1100px; margin:0 auto;
+    padding:0 40px 100px;
+    display:grid; grid-template-columns:5fr 7fr;
+    gap:64px; align-items:start;
+  }
+
+  /* Photo slot — warm linen frame */
+  .photo-frame {
+    background:var(--linen);
+    border-radius:24px;
+    aspect-ratio:3/4;
+    position:relative; overflow:hidden;
+    border:1px solid var(--rule);
+  }
+  .photo-placeholder {
+    width:100%; height:100%;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:12px;
+    color:var(--clay);
+  }
+  .photo-placeholder-icon {
+    width:48px; height:48px; opacity:.4;
+  }
+  .photo-placeholder-text {
+    font-family:'Cormorant Garamond',serif;
+    font-size:14px; font-style:italic; color:var(--clay);
+    opacity:.6; text-align:center; max-width:160px; line-height:1.5;
+  }
+  /* When photo is added later, replace placeholder with img */
+  .photo-frame img {
+    width:100%; height:100%; object-fit:cover;
+    filter:saturate(.9);
+  }
+
+  /* Bio text */
+  .bio-text {}
+  .bio-pull {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(22px,3vw,30px); font-weight:300; font-style:italic;
+    line-height:1.4; color:var(--soil);
+    margin-bottom:36px; letter-spacing:-.01em;
+  }
+  .bio-pull em { color:var(--terracotta); font-style:normal; }
+
+  .bio-body p {
+    font-size:16px; font-weight:300; line-height:1.85;
+    color:var(--soil-mid); margin-bottom:22px;
+  }
+  .bio-body p:last-child { margin-bottom:0; }
+  .bio-body strong { color:var(--soil); font-weight:400; }
+  .bio-body a {
+    color:var(--terracotta); border-bottom:1px solid rgba(196,98,74,.3);
+    transition:border-color .2s;
+  }
+  .bio-body a:hover { border-color:var(--terracotta); }
+
+  /* ── DIVIDER ─────────────────────────────────────────── */
+  .divider {
+    max-width:1100px; margin:0 auto; padding:0 40px;
+    border-top:1px solid var(--rule); margin-bottom:100px;
+  }
+
+  /* ── EXPERIENCE ──────────────────────────────────────── */
+  .experience {
+    max-width:1100px; margin:0 auto; padding:0 40px 100px;
+  }
+  .section-label {
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--clay-dark); margin-bottom:48px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-label::after {
+    content:''; flex:1; height:1px; background:var(--rule);
+  }
+
+  .exp-list { display:flex; flex-direction:column; gap:0; }
+  .exp-item {
+    display:grid; grid-template-columns:200px 1fr auto;
+    gap:40px; padding:36px 0;
+    border-bottom:1px solid var(--rule);
+    align-items:start;
+    transition:background .2s;
+    position:relative;
+  }
+  .exp-item::before {
+    content:''; position:absolute; left:-40px; right:-40px; top:0; bottom:0;
+    background:var(--linen); opacity:0; transition:opacity .3s; z-index:-1;
+    border-radius:var(--r);
+  }
+  .exp-item:hover::before { opacity:1; }
+  .exp-item:first-child { border-top:1px solid var(--rule); }
+
+  .exp-meta {}
+  .exp-date {
+    font-size:12px; letter-spacing:.06em; color:var(--soil-faint);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .exp-company {
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px; font-weight:400; color:var(--soil);
+    line-height:1.1;
+  }
+  .exp-company em { font-style:italic; color:var(--terracotta); }
+
+  .exp-detail {}
+  .exp-role {
+    font-size:15px; font-weight:500; color:var(--soil);
+    margin-bottom:10px; letter-spacing:-.01em;
+  }
+  .exp-desc {
+    font-size:14px; font-weight:300; color:var(--soil-mid);
+    line-height:1.7;
+  }
+  .exp-desc li { margin-left:16px; margin-bottom:4px; list-style:disc; }
+  .exp-desc li::marker { color:var(--clay); }
+
+  .exp-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:10px; font-weight:400; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--terracotta); background:rgba(196,98,74,.08);
+    border:1px solid rgba(196,98,74,.2);
+    padding:4px 10px; border-radius:99px; white-space:nowrap;
+  }
+  .exp-badge .star { color:#E5A830; }
+
+  /* ── SKILLS GRID ─────────────────────────────────────── */
+  .skills-section {
+    background:var(--linen);
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:80px 40px;
+  }
+  .skills-inner {
+    max-width:1100px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:48px;
+  }
+  .skill-group {}
+  .skill-group-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px; font-weight:400; font-style:italic;
+    color:var(--soil); margin-bottom:20px;
+    padding-bottom:12px; border-bottom:1px solid var(--rule);
+  }
+  .skill-list { display:flex; flex-wrap:wrap; gap:7px; }
+  .skill-pill {
+    font-size:12px; color:var(--soil-mid); padding:5px 13px;
+    background:var(--cream); border:1px solid var(--rule);
+    border-radius:99px;
+    transition:border-color .2s,color .2s,transform .15s;
+  }
+  .skill-pill:hover {
+    border-color:var(--terracotta); color:var(--terracotta);
+    transform:translateY(-1px);
+  }
+
+  /* ── EDUCATION + CERTS ───────────────────────────────── */
+  .edu-section {
+    max-width:1100px; margin:0 auto; padding:80px 40px;
+    display:grid; grid-template-columns:1fr 1fr; gap:80px;
+  }
+  .edu-item { margin-bottom:32px; }
+  .edu-item:last-child { margin-bottom:0; }
+  .edu-degree {
+    font-size:16px; font-weight:500; color:var(--soil);
+    margin-bottom:4px; letter-spacing:-.01em;
+  }
+  .edu-school {
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px; font-weight:300; font-style:italic;
+    color:var(--soil-mid); margin-bottom:4px;
+  }
+  .edu-detail { font-size:13px; color:var(--soil-faint); }
+
+  .cert-row { margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--rule); }
+  .cert-row:last-child { border:none; margin:0; padding:0; }
+  .cert-name { font-size:15px; font-weight:500; color:var(--soil); margin-bottom:3px; }
+  .cert-meta { font-size:13px; color:var(--soil-faint); }
+
+  /* ── CTA STRIP ───────────────────────────────────────── */
+  .cta-strip {
+    background:var(--soil); padding:80px 40px;
+    text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-strip::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity:.04; mix-blend-mode:screen;
+  }
+  .cta-inner { position:relative; z-index:1; max-width:600px; margin:0 auto; }
+  .cta-headline {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(36px,5vw,60px); font-weight:300;
+    letter-spacing:-.03em; line-height:1.05;
+    color:var(--parchment); margin-bottom:12px;
+  }
+  .cta-headline em { font-style:italic; color:var(--terracotta2); }
+  .cta-sub {
+    font-size:16px; font-weight:300; color:rgba(247,243,236,.5);
+    margin-bottom:40px; line-height:1.65;
+  }
+  .cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .btn-parchment {
+    background:var(--parchment); color:var(--soil);
+    padding:13px 28px; border-radius:99px;
+    font-size:14px; font-weight:400;
+    transition:background .2s,transform .15s;
+  }
+  .btn-parchment:hover { background:var(--terracotta); color:#fff; transform:translateY(-2px); }
+  .btn-outline-light {
+    border:1px solid rgba(247,243,236,.25); color:rgba(247,243,236,.7);
+    padding:12px 24px; border-radius:99px;
+    font-size:14px; font-weight:400;
+    transition:border-color .2s,color .2s,transform .15s;
+  }
+  .btn-outline-light:hover { border-color:var(--parchment); color:var(--parchment); transform:translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    border-top:1px solid var(--rule); padding:28px 40px;
+    display:flex; justify-content:center; background:var(--parchment);
+  }
+  .footer-inner {
+    width:100%; max-width:1100px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:16px; }
+  .footer-links { display:flex; gap:28px; }
+  .footer-links a { font-size:13px; color:var(--soil-mid); transition:color .2s; }
+  .footer-links a:hover { color:var(--soil); }
+  .footer-copy { font-size:12px; color:var(--soil-faint); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes wordRise { to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn   { to{opacity:1} }
+
+  .reveal {
+    opacity:0; transform:translateY(22px);
+    transition:opacity .85s cubic-bezier(.16,1,.3,1),
+                transform .85s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    nav { height:52px; }
+    .nav-inner { padding:0 24px; }
+    .page-header { grid-template-columns:1fr; gap:32px; padding:110px 24px 60px; }
+    .intro-row { grid-template-columns:1fr; padding:0 24px 72px; }
+    .photo-frame { aspect-ratio:4/3; max-width:360px; }
+    .experience { padding:0 24px 72px; }
+    .exp-item { grid-template-columns:1fr; gap:8px; }
+    .skills-inner { grid-template-columns:1fr; gap:36px; padding:0; }
+    .skills-section { padding:64px 24px; }
+    .edu-section { grid-template-columns:1fr; gap:48px; padding:64px 24px; }
+    .cta-strip { padding:64px 24px; }
+    footer { padding:28px 24px; }
+    .footer-inner { flex-direction:column; gap:14px; text-align:center; }
+    .footer-links { justify-content:center; }
+    .divider { padding:0 24px; }
+  }
+  </style>
+</head>
+<body>
+
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Lilith Haig</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="mailto:lkhaig@gmail.com" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-left">
+    <div class="page-kicker">
+      <span class="kicker-rule"></span>
+      About
+    </div>
+    <h1 class="page-title">
+      <span class="line"><span class="word">Lilith</span></span>
+      <span class="line"><span class="word">Haig.</span></span>
+    </h1>
+  </div>
+  <div class="page-header-right">
+    <p class="header-intro">
+      Motion designer. Creative strategist.
+      <strong>Five years</strong> of work that moves people —
+      literally and emotionally.
+    </p>
+    <p class="header-tagline">
+      Based in New York · Available for freelance projects,
+      collaborations, and conversations about great work.
+    </p>
+  </div>
+</div>
+
+<!-- INTRO ROW: photo + bio -->
+<div class="intro-row reveal">
+
+  <!-- Photo slot — swap in a real photo when ready -->
+  <div class="photo-frame">
+    <div class="photo-placeholder">
+      <svg class="photo-placeholder-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="8" stroke="#C8A882" stroke-width="1.5"/>
+        <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#C8A882" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <p class="photo-placeholder-text">Photo coming soon</p>
+    </div>
+  </div>
+
+  <!-- Bio -->
+  <div class="bio-text">
+    <p class="bio-pull">
+      I make brands <em>move</em> — and I mean that both ways.
+    </p>
+    <div class="bio-body">
+      <p>
+        I'm a motion designer and creative strategist based in New York with five years
+        of experience building motion systems, leading brand launches, and delivering
+        high-volume creative work at scale. I've worked across some of the largest brands
+        in the country and some of the most human-centred nonprofits — and I bring the same
+        level of craft and intention to all of it.
+      </p>
+      <p>
+        At <strong>Verizon</strong> I spent three years designing motion for one of the world's
+        most recognised brands — social campaigns, web experiences, digital signage, and
+        exec-level motion mockups that shipped to production. I built custom After Effects
+        scripts that saved the team 6–10 hours a week, mentored junior designers, and
+        collaborated directly with creative directors on work seen by millions.
+      </p>
+      <p>
+        I then moved into healthtech — first at <strong>Clover Learning</strong>, making
+        complex STEM and healthcare concepts genuinely engaging through 2D and 3D animation,
+        then at <strong>PracticeTek</strong>, where I operate as the sole motion voice across
+        12 brands. Most recently I led the full motion suite for
+        <a href="projects/rheo.html">Rheo</a>, ChiroTouch's first AI assistant —
+        a MarCom Award-recognised campaign spanning hero video, social, and email.
+      </p>
+      <p>
+        I'm deeply fluent in the AI tools reshaping creative production and I use them
+        to <strong>expand what's possible</strong> without sacrificing craft.
+        I build systems that scale, stories that stick, and work that feels like it was
+        made by a human who genuinely cares. Because it was.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section class="experience">
+  <div class="section-label reveal">Experience</div>
+
+  <div class="exp-list">
+
+    <!-- PracticeTek -->
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Apr 2025 — Present</div>
+        <div class="exp-company">Practice<em>Tek</em></div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Motion Graphics Artist</div>
+        <ul class="exp-desc">
+          <li>Sole motion designer across a portfolio of 12 brands — setting creative standards independently</li>
+          <li>End-to-end production of all video and motion content for marketing, product, and social teams</li>
+          <li>Led full motion suite for Rheo AI assistant launch — hero video, email GIFs, LinkedIn campaigns</li>
+          <li>Built and maintains company-wide motion infrastructure: scalable templates, file systems, async review workflows</li>
+          <li>Integrates AI tools (ElevenLabs, OpusClips, Claude, Gemini) to streamline output and increase throughput</li>
+        </ul>
+      </div>
+      <div>
+        <span class="exp-badge"><span class="star">★</span> MarCom Award</span>
+      </div>
+    </div>
+
+    <!-- Clover Learning -->
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Feb 2024 — Apr 2025</div>
+        <div class="exp-company">Clover<br><em>Learning</em></div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Motion Designer</div>
+        <ul class="exp-desc">
+          <li>Produced animated educational content for STEM and healthcare topics using After Effects and Cinema 4D</li>
+          <li>Translated complex clinical and scientific concepts into clear, engaging visual narratives</li>
+        </ul>
+      </div>
+      <div></div>
+    </div>
+
+    <!-- Verizon -->
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">May 2021 — Feb 2024</div>
+        <div class="exp-company"><em>Verizon</em></div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">2D Animator</div>
+        <ul class="exp-desc">
+          <li>Designed and produced motion graphics for social, web, and digital signage campaigns</li>
+          <li>Developed custom After Effects scripts saving 6–10 hours per week per team member</li>
+          <li>Created motion mockups for myPlan — presented to executives, shipped to production</li>
+          <li>Collaborated with creative directors and developers to prototype motion for digital experiences</li>
+          <li>Mentored junior designers and supported onboarding</li>
+        </ul>
+      </div>
+      <div>
+        <span class="exp-badge"><span class="star">★</span> NYF Award</span>
+      </div>
+    </div>
+
+    <!-- CPC Freelance -->
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Jul 2021 — Present</div>
+        <div class="exp-company">Creative<br>Placemaking<br><em>Communities</em></div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Principal Designer — Freelance</div>
+        <ul class="exp-desc">
+          <li>Led rebrand driving 400%+ increase in web engagement</li>
+          <li>Designed campaigns increasing event attendance by 40%</li>
+          <li>Designed and built CPC Network — a paid social platform expanding community engagement and revenue</li>
+        </ul>
+      </div>
+      <div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="skills-inner">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Motion & Animation</div>
+      <div class="skill-list">
+        <span class="skill-pill">After Effects</span>
+        <span class="skill-pill">Cinema 4D</span>
+        <span class="skill-pill">Premiere Pro</span>
+        <span class="skill-pill">Lottie</span>
+        <span class="skill-pill">2D Animation</span>
+        <span class="skill-pill">3D Workflows</span>
+        <span class="skill-pill">Motion Systems</span>
+        <span class="skill-pill">Rotoscoping</span>
+        <span class="skill-pill">Video Editing</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Design & Strategy</div>
+      <div class="skill-list">
+        <span class="skill-pill">Figma</span>
+        <span class="skill-pill">Illustrator</span>
+        <span class="skill-pill">UI/UX Design</span>
+        <span class="skill-pill">Brand Identity</span>
+        <span class="skill-pill">Creative Strategy</span>
+        <span class="skill-pill">Visual Storytelling</span>
+        <span class="skill-pill">Scalable Templates</span>
+        <span class="skill-pill">Print Design</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">AI & Production</div>
+      <div class="skill-list">
+        <span class="skill-pill">ElevenLabs</span>
+        <span class="skill-pill">OpusClips</span>
+        <span class="skill-pill">Claude</span>
+        <span class="skill-pill">Gemini</span>
+        <span class="skill-pill">ChatGPT</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Remote Workflows</span>
+        <span class="skill-pill">Async Pipelines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS — compact, single row, no hierarchy inflation -->
+<section class="edu-section" style="grid-template-columns:1fr 1fr 1fr;">
+  <div class="reveal">
+    <div class="section-label" style="margin-bottom:36px;">Certifications</div>
+    <div class="cert-row">
+      <div class="cert-name">AI x Design Thinking</div>
+      <div class="cert-meta">Ideo U · 2026</div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-name">Advanced Motion Methods</div>
+      <div class="cert-meta">School of Motion · 2025</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="section-label" style="margin-bottom:36px;">Awards</div>
+    <div class="cert-row">
+      <div class="cert-name">MarCom Award</div>
+      <div class="cert-meta">Rheo by ChiroTouch · 2025</div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-name">NYF Advertising Award</div>
+      <div class="cert-meta">Verizon Pay Phone · 2023</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="section-label" style="margin-bottom:36px;">Education</div>
+    <div class="cert-row">
+      <div class="cert-name">BA, Studio Fine Arts &amp; Art History</div>
+      <div class="cert-meta">Union College, Schenectady NY</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="cta-inner reveal">
+    <h2 class="cta-headline">
+      Let's make something<br><em>worth watching.</em>
+    </h2>
+    <p class="cta-sub">
+      Open to freelance projects, brand collaborations,
+      and conversations about motion that matters.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:lkhaig@gmail.com" class="btn-parchment">Get in Touch</a>
+      <a href="https://linkedin.com/in/lilith-haig" target="_blank" class="btn-outline-light">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Lilith Haig</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/lilith-haig" target="_blank">LinkedIn</a>
+      <a href="mailto:lkhaig@gmail.com">Email</a>
+    </div>
+    <div class="footer-copy">© 2026 Lilith Haig</div>
+  </div>
+</footer>
+
+<script>
+  const dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.cssText=`left:${mx}px;top:${my}px`;});
+  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.cssText=`left:${rx}px;top:${ry}px`;requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+  });
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);io.unobserve(e.target);}
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

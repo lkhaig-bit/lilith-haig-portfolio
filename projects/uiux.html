@@ -405,22 +405,6 @@
     });
   },{threshold:.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  function playToggle(vidId, posterId, btnId) {
-    const vid    = document.getElementById(vidId);
-    const poster = document.getElementById(posterId);
-    const btn    = document.getElementById(btnId);
-    if (!vid) return;
-    if (vid.paused) {
-      vid.play();
-      if (poster) poster.classList.add('hidden');
-      if (btn) {
-        btn.style.opacity = '0';
-        const wrap = btn.closest('.vp,.reel-frame,.browser-content,.hero-video-wrap,.reel-card-hero');
-        if (wrap) {
-          wrap.addEventListener('mouseenter', () => { if (!vid.paused) btn.style.opacity='1'; });
-          wrap.addEventListener('mouseleave', () => { if (!vid.paused) btn.style.opacity='0'; });
-        }
       }
     } else {
       vid.pause();
@@ -428,10 +412,38 @@
     }
   }
   function playVid(a,b,c)  { playToggle(a,b,c); }
-  function play(a,b,c)     { playToggle(a,b,c); }
-  function playReel()      { playToggle('reelVid','reelPoster','reelPlayBtn'); }
-  function playBrowser()   { playToggle('reelVid','ctPoster','ctPlayBtn'); }
-  function playHero()      { playToggle('heroVid','heroPoster','heroBtn'); }
+
+
+  function playVid(btn) {
+    const wrap = btn.closest('.vp, .vid-frame, .reel-frame, .browser-content, .payphone-video, .social-frame');
+    if (!wrap) return;
+    const vid    = wrap.querySelector('video');
+    const poster = wrap.querySelector('img.rp, img.vid-poster, img.vp-poster');
+    if (!vid) return;
+    if (vid.paused) {
+      vid.play();
+      if (poster) poster.classList.add('hidden');
+      btn.style.opacity = '0';
+      wrap.addEventListener('mouseenter', () => { if (!vid.paused) btn.style.opacity='1'; }, {once:false});
+      wrap.addEventListener('mouseleave', () => { if (!vid.paused) btn.style.opacity='0'; }, {once:false});
+    } else {
+      vid.pause();
+      btn.style.opacity = '1';
+    }
+  }
+  function play(a,b,c)   { playVid(document.getElementById(c)?.closest('.vp-btn') || document.getElementById(b)?.closest('.vp-btn')); }
+  function playReel()    {
+    const btn = document.getElementById('reelPlayBtn');
+    if (btn) playVid(btn);
+  }
+  function playBrowser() {
+    const btn = document.getElementById('ctPlayBtn');
+    if (btn) playVid(btn);
+  }
+  function playHero() {
+    const btn = document.getElementById('heroBtn') || document.getElementById('heroPlayBtn');
+    if (btn) playVid(btn);
+  }
 
 </script>
 </body>

@@ -953,6 +953,34 @@
     });
   },{threshold:.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  function playToggle(vidId, posterId, btnId) {
+    const vid    = document.getElementById(vidId);
+    const poster = document.getElementById(posterId);
+    const btn    = document.getElementById(btnId);
+    if (!vid) return;
+    if (vid.paused) {
+      vid.play();
+      if (poster) poster.classList.add('hidden');
+      if (btn) {
+        btn.style.opacity = '0';
+        const wrap = btn.closest('.vp,.reel-frame,.browser-content,.hero-video-wrap,.reel-card-hero');
+        if (wrap) {
+          wrap.addEventListener('mouseenter', () => { if (!vid.paused) btn.style.opacity='1'; });
+          wrap.addEventListener('mouseleave', () => { if (!vid.paused) btn.style.opacity='0'; });
+        }
+      }
+    } else {
+      vid.pause();
+      if (btn) btn.style.opacity = '1';
+    }
+  }
+  function playVid(a,b,c)  { playToggle(a,b,c); }
+  function play(a,b,c)     { playToggle(a,b,c); }
+  function playReel()      { playToggle('reelVid','reelPoster','reelPlayBtn'); }
+  function playBrowser()   { playToggle('reelVid','ctPoster','ctPlayBtn'); }
+  function playHero()      { playToggle('heroVid','heroPoster','heroBtn'); }
+
 </script>
 </body>
 </html>

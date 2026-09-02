@@ -921,11 +921,7 @@
   /* Nav */
   const nav=document.getElementById('nav');
   window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
-  /* Reel click */
-  const rv=document.getElementById('reelVid');
-  const rp=document.getElementById('reelPoster');
-  const rb=document.getElementById('reelPlayBtn');
-  if(rb) rb.addEventListener('click',()=>{ rv.play(); rp.classList.add('hidden'); rb.classList.add('hidden'); });
+
 
   /* 3D card tilt */
   document.querySelectorAll('.pcard').forEach(card=>{
